@@ -1,0 +1,24 @@
+void loop() {
+    int heure, minute;
+    DateTime now = rtc.now();
+    heure = now.hour();
+    minute = now.minute();
+
+    unsigned long currentMillis = millis();
+    
+    // Affichage de l'heure et de l'alarme
+    afficherHeure(heure, minute);  // Affiche l'heure
+    afficherAlarmeOLED(heure, minute);  // Affiche l'heure de l'alarme
+
+    // Changer le format de l'heure entre 12h et 24h ou désactiver l'alarme avec le bouton 1
+    if (digitalRead(SWITCH_FORMAT) == LOW && currentMillis - lastButtonPress > debounceDelay) {
+        lastButtonPress = currentMillis;
+        if (alarmActive) {
+            alarmActive = false;
+            stopAlarm();  // Arrêter la mélodie
+        } else {
+            is12HourFormat = !is12HourFormat;
+        }
+        afficherAlarmeOLED(heure, minute);  // Réactualise l'affichage de l'alarme
+        delay(300);  // Anti-rebond
+    }
