@@ -1,0 +1,32 @@
+void afficherAlarmeOLED(int heure, int minute) {
+    display.clearDisplay();
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0, 0);
+    display.print("Heure actuelle: ");
+    display.print(heure);
+    display.print(":");
+    if (minute < 10) display.print("0");
+    display.print(minute);
+
+    display.setCursor(0, 20);
+    display.print("Alarme reglee à:\n ");
+    display.print(alarmHour);
+    display.print(":");
+    if (alarmMinute < 10) display.print("0");
+    display.print(alarmMinute);
+
+    display.setCursor(0, 40);
+    display.print("Alarme: ");
+    display.print(alarmActive ? "Activee" : "Desactivee");
+
+    display.setCursor(0, 50); // Déplacer le curseur
+    display.print("Sonnerie: ");
+    if (melodyIndex == 0) {
+        display.print("Sonnerie 1");
+    } else {
+        display.print("Sonnerie 2");
+    }
+
+    display.display();
+}
