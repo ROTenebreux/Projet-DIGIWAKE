@@ -1,0 +1,15 @@
+
+void afficherMenu() {
+    display.clearDisplay();
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0, 0);
+    display.print("Menu:");
+    display.setCursor(0, 10);
+    display.print("1. Regler heure");
+    display.setCursor(0, 20);
+    display.print("2. Regler alarme");
+    display.setCursor(0, 30);
+    display.print("3. Format 12/24");
+    display.display();
+}
