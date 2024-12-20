@@ -1,0 +1,29 @@
+void afficherHeure(int heure, int minute) {
+    if (is12HourFormat && heure > 12) {
+        heure -= 12;
+    }
+
+    afficherChiffre(minute % 10, 0);
+    afficherChiffre(minute / 10, 1);
+    afficherChiffre(heure % 10, 2);
+    afficherChiffre(heure / 10, 3);
+
+    // Vérifier si une seconde s'est écoulée
+    unsigned long currentMillis = millis();
+    if (currentMillis - previousMillis >= interval) {
+        // Sauvegarder le temps actuel
+        previousMillis = currentMillis;
+
+        // Inverser l'état de colonVisible pour alterner l'affichage des deux points
+        colonVisible = !colonVisible;
+
+        // Mettre à jour les deux points
+        if (colonVisible) {
+            matriceLed.setLed(1, 3, 0, true);
+            matriceLed.setLed(1, 5, 0, true);
+        } else {
+            matriceLed.setLed(1, 3, 0, false);
+            matriceLed.setLed(1, 5, 0, false);
+        }
+    }
+}
