@@ -1,0 +1,6 @@
+void afficherChiffre(int valeur, int indexMatrice) {
+    matriceLed.clearDisplay(indexMatrice);
+    for (int ligne = 0; ligne < 8; ligne++) {
+        matriceLed.setRow(indexMatrice, ligne, LISTE_AFFICHAGE[valeur][ligne]);
+    }
+}
