@@ -1,0 +1,26 @@
+void setup() {
+    Wire.begin();
+    rtc.begin();
+
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+        Serial.println("Erreur OLED");
+        while (true);
+    }
+    display.clearDisplay();
+    pinMode(TRIGGER_PIN, OUTPUT);
+    pinMode(ECHO_PIN, INPUT);
+    pinMode(buzzerPin, OUTPUT);
+    pinMode(SWITCH_FORMAT, INPUT_PULLUP);
+    pinMode(STOP_ALARM, INPUT_PULLUP);
+    pinMode(SET_HOUR_BUTTON, INPUT_PULLUP);
+
+    for (int i = 0; i < 4; i++) {
+        matriceLed.shutdown(i, false);
+        matriceLed.setIntensity(i, 8);
+        matriceLed.clearDisplay(i);
+    }
+
+    if (!rtc.isrunning()) {
+        rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+    }
+}
